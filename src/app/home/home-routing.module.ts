@@ -9,6 +9,10 @@ const routes: Routes = [
     component: QrCodeComponent,
   },
   {
+    path: 'profile',
+    component: QrCodeComponent,
+  },
+  {
     path: '',
     component: HomePage,
   },

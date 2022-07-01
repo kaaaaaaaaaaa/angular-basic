@@ -24,13 +24,12 @@ export class HomePage {
     this.appPages = [
       {
         title: 'Home',
-        url: '/home-results',
-        direct: 'root',
+        url: '/home/profile',
         icon: 'home'
       },
       {
         title: 'About',
-        url: '/about',
+        url: '/home/about',
         direct: 'forward',
         icon: 'information-circle-outline'
       },
