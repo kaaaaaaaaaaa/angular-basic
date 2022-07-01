@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
-import { Platform } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
+import { Pages } from 'src/models/page';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+// import { SplashScreen } from '@awesome-cordova-plugins/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+
 
 @Component({
   selector: 'app-home',
@@ -8,52 +13,51 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  scanSub: any;
-  qrText: string;
-  //
-  qrData = null;
-  createdCode = null;
+  public appPages: Array<Pages>;
 
-  constructor(public platform: Platform, private qrScanner: QRScanner) {
-    this.platform.backButton.subscribeWithPriority(0, () => {
-      document.getElementsByTagName('body')[0].style.opacity = '1';
-      this.scanSub.unsubscribe();
-    });
+  constructor(
+    private platform: Platform,
+    private splashScreen: SplashScreen,
+    private statusBar: StatusBar,
+    public navCtrl: NavController
+  ) {
+    this.appPages = [
+      {
+        title: 'Home',
+        url: '/home-results',
+        direct: 'root',
+        icon: 'home'
+      },
+      {
+        title: 'About',
+        url: '/about',
+        direct: 'forward',
+        icon: 'information-circle-outline'
+      },
+
+      {
+        title: 'App Settings',
+        url: '/settings',
+        direct: 'forward',
+        icon: 'cog'
+      }
+    ];
+
+    this.initializeApp();
   }
 
-  startScanning() {
-    // Optionally request the permission early
-    this.qrScanner
-      .prepare()
-      .then((status: QRScannerStatus) => {
-        if (status.authorized) {
-          this.qrScanner.show();
-          this.scanSub = document.getElementsByTagName(
-            'body'
-          )[0].style.opacity = '0';
-          debugger;
-          this.scanSub = this.qrScanner.scan().subscribe(
-            (textFound: string) => {
-              document.getElementsByTagName('body')[0].style.opacity = '1';
-              this.qrScanner.hide();
-              this.scanSub.unsubscribe();
-
-              this.qrText = textFound;
-            },
-            (err) => {
-              alert(JSON.stringify(err));
-            }
-          );
-        } else if (status.denied) {
-        } else {
-        }
-      })
-      .catch((e: any) => console.log('Error is', e));
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    }).catch(() => {});
   }
 
-  //
-  createCode() {
-    this.createdCode = this.qrData;
-    console.log(this.createdCode);
+  goToEditProgile() {
+    this.navCtrl.navigateForward('edit-profile');
+  }
+
+  logout() {
+    this.navCtrl.navigateRoot('/');
   }
 }

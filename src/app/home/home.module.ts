@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { QrCodeModule } from 'ng-qrcode';
+import { QrCodeComponent } from './qr-code/qr-code.component';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { RouteReuseStrategy } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -15,6 +19,11 @@ import { QrCodeModule } from 'ng-qrcode';
     HomePageRoutingModule,
     QrCodeModule,
   ],
-  declarations: [HomePage],
+  declarations: [HomePage, QrCodeComponent],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  ],
 })
 export class HomePageModule {}
