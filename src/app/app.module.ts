@@ -4,17 +4,24 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { CommonModule } from '@angular/common';
 import { QRScanner } from '@ionic-native/qr-scanner/ngx';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    AppRoutingModule,
+    CommonModule,
+    BrowserModule,
+    IonicModule.forRoot(),
+  ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     QRScanner,
+    // FormBuilder,
   ],
   bootstrap: [AppComponent],
 })
