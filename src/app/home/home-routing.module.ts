@@ -13,6 +13,14 @@ const routes: Routes = [
     component: QrCodeComponent,
   },
   {
+    path: 'about',
+    component: QrCodeComponent,
+  },
+  {
+    path: 'settings',
+    component: QrCodeComponent,
+  },
+  {
     path: '',
     component: HomePage,
   },

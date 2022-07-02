@@ -5,6 +5,7 @@ import { Pages } from 'src/models/page';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 // import { SplashScreen } from '@awesome-cordova-plugins/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class HomePage {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public navCtrl: NavController
+    private router: Router,
+    public navCtrl: NavController,
   ) {
     this.appPages = [
       {
@@ -36,7 +38,7 @@ export class HomePage {
 
       {
         title: 'App Settings',
-        url: '/settings',
+        url: '/home/settings',
         direct: 'forward',
         icon: 'cog'
       }
@@ -57,6 +59,9 @@ export class HomePage {
   }
 
   logout() {
-    this.navCtrl.navigateRoot('/');
+    console.log(
+      'run'
+    );
+    this.router.navigate(['/login']);
   }
 }
