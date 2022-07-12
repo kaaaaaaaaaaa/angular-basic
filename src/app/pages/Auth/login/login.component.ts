@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from './../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
   login() {
-    this.router.navigateByUrl('/home');
+    this.authService
+      .login()
+      .subscribe((r) => this.router.navigateByUrl('/home'));
   }
   register() {
     this.router.navigateByUrl('/register');
