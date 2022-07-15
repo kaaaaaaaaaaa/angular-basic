@@ -1,6 +1,6 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../pages/Auth/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,13 +12,12 @@ export class HeaderComponent implements OnInit {
   constructor(public authService: AuthService, public router: Router) {}
 
   ngOnInit(): void {
-    console.log(this.authService.isLoggedIn);
-
-    (this.router.url === '/login' && this.isLoginPage === true) ||
-      this.isLoginPage === false;
-    console.log(this.isLoginPage);
   }
   ngOnChanges(changes: SimpleChanges): void{
   console.log(changes);
+
+  }
+  goToLogin(){
+    this.authService.login().subscribe(r=> this.router.navigateByUrl('home'))
   }
 }

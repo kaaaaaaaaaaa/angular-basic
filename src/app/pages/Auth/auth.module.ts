@@ -7,15 +7,16 @@ import { RouterModule } from '@angular/router';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-
+import { LoadingComponent } from './../../shared/components/loading/loading.component';
 
 @NgModule({
   declarations: [
+    LoadingComponent,
     LoginComponent,
     RegisterComponent,
   ],
   imports: [
-    RouterModule,
+  RouterModule,
     CommonModule,
     FormsModule,
     AuthRoutingModule
